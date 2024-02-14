@@ -18,7 +18,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/")
-@CrossOrigin(origins = "http://urlshortener-production-6d4a.up.railway.app")
 public class UrlController {
 
     private final MappingRepo controller;
