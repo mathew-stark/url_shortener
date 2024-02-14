@@ -27,7 +27,6 @@ public class UrlController {
 
     @Autowired
     UrlController(MappingRepo controller){
-//        this.taskModel = taskModel;
         this.controller = controller;
     }
 
