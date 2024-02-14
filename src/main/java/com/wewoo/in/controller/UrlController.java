@@ -3,6 +3,7 @@ package com.wewoo.in.controller;
 import com.wewoo.in.dto.CreateMappingDto;
 import com.wewoo.in.model.UrlMapping;
 import com.wewoo.in.repository.MappingRepo;
+import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.Objects;
 import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/")
@@ -32,7 +34,15 @@ public class UrlController {
 
     @PostMapping("/createMapping")
     public ResponseEntity<String> createMapping(@RequestBody CreateMappingDto request){
+        UrlValidator urlValidator = new UrlValidator();
+
         if (Objects.equals(request.auth(), this.auth)){
+
+            if (! urlValidator.isValid(request.target())){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("Url not valid");
+            }
+
             System.out.println(request.target());
             String url = generateIdentifier(request.target());
 
