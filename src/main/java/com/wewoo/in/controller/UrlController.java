@@ -42,7 +42,7 @@ public class UrlController {
             if(!isPresent){
                 UrlMapping mapping = new UrlMapping(null, url, request.target(), LocalDateTime.now());
                 controller.save(mapping);
-                return ResponseEntity.status(HttpStatus.OK).body("Mapping added successfully -- access it through http://wewoo.in/"+ url);
+                return ResponseEntity.status(HttpStatus.OK).body("Mapping added successfully -- access it through http://urlshortener-production-6d4a.up.railway.app/"+ url);
             }
             else{
                 return ResponseEntity.status(HttpStatus.CONFLICT)
